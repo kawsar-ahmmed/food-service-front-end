@@ -24,13 +24,18 @@ const Home = () => {
         })
         .then(res=> res.json())
         .then(data=> {
-            console.log('deleted', user)
+            console.log('deleted', user);
+            if (data.deletedCount > 0) {
+                const remaining = user.filter(user => user._id != id);
+                setUser(remaining);
+            }
         })
 
 
     }
     return (
         <div>
+            <h1 className=' text-center text-2xl text-green-800 pb-4 font-bold'>Total users: {user.length}</h1>
             <div className="user-full grid gap-4 grid-cols-2 container mx-auto">
                 {
                     user.map(item =>
